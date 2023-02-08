@@ -1,0 +1,15 @@
+{
+    "name": "tsel/blog",
+    "autoload": {
+        "psr-4": {
+            "Tsel\\Blog\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sergey-tsel",
+            "email": "tselishchevsy@gmail.com"
+        }
+    ],
+    "require": {}
+}
