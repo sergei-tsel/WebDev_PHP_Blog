@@ -1,6 +1,8 @@
 <?php
 namespace Tsel\Blog\core;
 
+use Tsel\Blog\controllers\MainController;
+
 class Route
 {
     static function start()

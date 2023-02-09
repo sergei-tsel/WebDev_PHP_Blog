@@ -17,7 +17,7 @@
         <div class="navbar-collapse col-11" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" id="admin">Вход</a>
-                <script>post('.admin', '/profile/administer')</script>
+                <script>get('.admin', '/profile/administer')</script>
             </div>
         </div>
     </div>
