@@ -8,8 +8,7 @@
                 <p class="text-muted">
                     <?php echo $value['prev_desc'] ?>
                 </p>
-                <button type="button" class="btn btn-primary"><a id="news"></a>Далее</button>
-                <script>get('.news', <?php echo $value['href_news'] ?>)</script>
+                <a href="<?php echo $value['href_news'] ?>" class="btn btn-primary" tabindex="-1" role="button">Далее</a>
             </div>
         </section>
         <!--Section: News of the day-->
