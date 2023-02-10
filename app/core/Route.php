@@ -2,6 +2,7 @@
 namespace Tsel\Blog\core;
 
 use Tsel\Blog\controllers\MainController;
+use Tsel\Blog\controllers\AuthController;
 
 class Route
 {
@@ -27,6 +28,7 @@ class Route
         $controller = match($controllerName)
         {
             'MainController' => MainController::class,
+            'AuthController' => AuthController::class,
             default => 'not found'
         };
 

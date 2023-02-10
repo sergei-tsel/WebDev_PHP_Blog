@@ -26,4 +26,9 @@ class MainController extends Controller
         $data = User::Reader->choose($id, $this->model);
         echo $this->view->render('news', $data);
     }
+
+    public function administer() {
+        $origin = User::Origin->choose();
+        echo $this->view->render('auth', $origin);
+    }
 }

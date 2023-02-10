@@ -14,7 +14,7 @@
         <a class="navbar-brand col-1" href="/">Блог</a>
         <div class="navbar-collapse col-11" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/profile/administer">Вход</a>
+                <a class="nav-link" href="/main/administer">Вход</a>
             </div>
         </div>
     </div>
