@@ -48,7 +48,13 @@ class Route
 
         if(method_exists($controller, $action))
         {
-            $controller->$action();
+            if (!empty($routes[3]))
+            {
+                $id = $routes[3];
+                $controller->$action($id);
+            } else {
+                $controller->$action();
+            }
         } else {
             Route::ErrorPage404();
         }
