@@ -22,7 +22,7 @@
                 <input type="text" class="form-control" name="href" id="href">
             </div>
             <div class="mb-3">
-                <label for="tag" class="form-label">Тэг </label>
+                <label for="tag" class="form-label">Тэги (в конце каждого ;) </label>
                 <input type="text" class="form-control" name="tag" id="tag">
             </div>
             <button type="submit" class="btn btn-primary mb-3">Отправить</button>

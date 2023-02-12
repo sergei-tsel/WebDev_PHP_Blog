@@ -35,6 +35,7 @@ class NewsModel extends Model
         parent::$dataBase->setBasePrepare(self::SQL_SET_NEWS_VIEW, [$href]);
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_ONE_NEWS_BY_HREF, ['href_news' => $href]);
         $author = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS_AUTHOR, ['id' => $news[0]['id_profile']]);
+        $news[0]['tag'] = explode(';', $news[0]['tag']);
         return array('news' => $news[0], 'author' => $author[0]);
     }
 }

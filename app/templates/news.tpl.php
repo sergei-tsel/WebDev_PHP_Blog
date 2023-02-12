@@ -12,6 +12,10 @@
         <p class="text-muted">
             <?php echo $author['name'] . $author['surname'] ?>
         </p>
-        <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"><?php echo $news['tag'] ?></span>
+        <div class="row">
+            <?php foreach ($news['tag'] as $tag): ?>
+                <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"><?php echo $tag ?></span>
+            <?php endforeach; ?>
+        </div>
     </footer>
 </article>
