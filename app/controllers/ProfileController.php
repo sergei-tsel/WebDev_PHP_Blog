@@ -36,4 +36,14 @@ class ProfileController extends Controller
     public function administer() {
         echo $this->view->render('admin', []);
     }
+
+    public function exit() {
+        Profile::Disconnected->choose($this->model);
+        echo $this->view->render('main', []);
+    }
+
+    public function use() {
+        Profile::Removed->choose($this->model);
+        echo $this->view->render('main', []);
+    }
 }
