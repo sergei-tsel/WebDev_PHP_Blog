@@ -12,7 +12,7 @@ enum News
     public function choose($model, $href = null) {
         return match($this) {
             case News::Writing => $this->process($model),
-            case News::Reading => $model->getNews($href)
+            case News::Reading => $model->getNewsByHref($href)
         };
     }
 

@@ -8,10 +8,10 @@ enum User
     case Reader;
     case Origin;
 
-    public function choose($model = null, $id = null)
+    public function choose($model = null, $href = null)
     {
         return match($this) {
-            User::Reader => $model->getById($id),
+            User::Reader => $model->getNewsByHref($href),
             User::Origin => $this->checkGuest()
         };
     }

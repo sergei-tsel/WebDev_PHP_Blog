@@ -21,9 +21,9 @@ class MainController extends Controller
         echo $this->view->render('main', $data);
     }
 
-    public function read($id)
+    public function read($href)
     {
-        $data = User::Reader->choose($this->model, $id);
+        $data = User::Reader->choose($this->model, $href);
         echo $this->view->render('news', $data);
     }
 

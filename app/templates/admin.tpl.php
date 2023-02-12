@@ -38,7 +38,7 @@
                         <p class="text-muted">
                             <?php echo $value['prev_desc'] ?>
                         </p>
-                        <a href="<?php echo $value['href_news'] ?>" class="btn btn-primary" tabindex="-1" role="button">Далее</a>
+                        <a href="/news/read/<?php echo $value['href_news'] ?>" class="btn btn-primary" tabindex="-1" role="button">Далее</a>
                     </div>
                 </section>
             </div>
