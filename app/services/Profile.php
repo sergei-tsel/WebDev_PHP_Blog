@@ -18,25 +18,25 @@ enum Profile
 
        return match ($this) {
             Profile::Specified => $model->getProfile($accountId),
-            Profile::Modified => $this->represent($accountId, $model),
+            Profile::Modified => $this->represent($model, $accountId,),
             Profile::Disconnected => $this->disconnect(),
             Profile::Removed => $this->deleteAccountAndProfile($model)
        };
     }
 
-    public function represent($accountId, $model) {
+    private function represent($model, $accountId) {
         $avatar = $model->uploadFile();
         $model->updateProfile($accountId, $avatar);
     }
 
-    public function disconnect() {
+    private function disconnect() {
         header_remove('Location: /index.php');
         session_write_close();
         $newsModel = new NewsModel();
         return $newsModel->getData();
     }
 
-    public function deleteAccountAndProfile($model)
+    private function deleteAccountAndProfile($model)
     {
         $accountId = $model->getAccountIdByCookie();
         $profile = $model->getProfile($accountId);

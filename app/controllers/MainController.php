@@ -23,7 +23,7 @@ class MainController extends Controller
 
     public function read($id)
     {
-        $data = User::Reader->choose($id, $this->model);
+        $data = User::Reader->choose($this->model, $id);
         echo $this->view->render('news', $data);
     }
 
