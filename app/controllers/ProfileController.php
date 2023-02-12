@@ -38,12 +38,12 @@ class ProfileController extends Controller
     }
 
     public function exit() {
-        Profile::Disconnected->choose($this->model);
-        echo $this->view->render('main', []);
+        $data = Profile::Disconnected->choose($this->model);
+        echo $this->view->render('main', $data);
     }
 
     public function use() {
-        Profile::Removed->choose($this->model);
-        echo $this->view->render('main', []);
+        $data = Profile::Removed->choose($this->model);
+        echo $this->view->render('main', $data);
     }
 }

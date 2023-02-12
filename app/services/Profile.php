@@ -3,6 +3,7 @@
 namespace Tsel\Blog\services;
 
 use Tsel\Blog\models\AccountModel;
+use Tsel\Blog\models\NewsModel;
 
 enum Profile
 {
@@ -15,16 +16,12 @@ enum Profile
     {
        $accountId = $model->getAccountIdByCookie();
 
-       match ($this) {
-            Profile::Specified => null,
+       return match ($this) {
+            Profile::Specified => $model->getProfile($accountId),
             Profile::Modified => $this->represent($accountId, $model),
             Profile::Disconnected => $this->disconnect(),
             Profile::Removed => $this->deleteAccountAndProfile($model)
        };
-
-       if ($this === Profile::Specified) {
-          return $model->getProfile($accountId);
-       }
     }
 
     public function represent($accountId, $model) {
@@ -35,6 +32,8 @@ enum Profile
     public function disconnect() {
         header_remove('Location: /index.php');
         session_write_close();
+        $newsModel = new NewsModel();
+        return $newsModel->getData();
     }
 
     public function deleteAccountAndProfile($model)
@@ -44,5 +43,7 @@ enum Profile
         $model->deletePofile($profile['id']);
         $accountModel = new AccountModel();
         $accountModel->delete($accountId);
+        $newsModel = new NewsModel();
+        return $newsModel->getData();
     }
 }
