@@ -26,7 +26,7 @@
         </form>
     </div>
     <div id="datatable">
-        <?php foreach ($data as $value) : ?>
+        <?php foreach ($news as $value) : ?>
             <div class="card mb-3 row g-0">
                 <div class="col-md-4">
                     <img src="<?php echo $value['href_avatar'] ?>" style="max-width: 70px; height: 50px" class="card-img-top img-fluid col-md-6" alt="Фотография"/>

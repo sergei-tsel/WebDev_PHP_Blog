@@ -7,13 +7,12 @@ class ProfileModel extends Model
 {
 
     const SQL_SET_PROFILE = "INSERT INTO profile (id_account) VALUES (:account)";
-
     const SQL_GET_PROFILE_ACCOUNT = "SELECT id FROM account WHERE login = :login AND password = :password";
 
-    const SQL_GET_PROFILE = "SELECT * FROM profile WHERE id_account = :account";
+    const SQL_GET_PROFILE_BY_ACCOUNT_ID = "SELECT * FROM profile WHERE id_account = :account";
+    const SQL_GET_PROFILE_BY_ID = "SELECT * FROM profile WHERE id = :id";
 
     const SQL_UPDATE_PROFILE = "UPDATE profile SET name = :name, surname = :surname, dt_birth = :birth, sex = :sex, phone = :phone, email = :email, href_avatar = :avatar WHERE id_account = :account";
-
     const SQL_DELETE_PROFILE = "DELETE FROM profile WHERE id = :id";
 
     public function setProfile($accountId)
@@ -26,9 +25,13 @@ class ProfileModel extends Model
         return parent::$dataBase->getBasePrepare(self::SQL_GET_PROFILE_ACCOUNT, ['login' => $_COOKIE['login'], 'password' => $_COOKIE['password']]);
     }
 
-    public function getProfile($accountId)
+    public function getProfile($id, $visit = false)
     {
-        $profile = parent::$dataBase->getBasePrepare(self::SQL_GET_PROFILE, ['account' => $accountId]);
+        if ($visit) {
+            $profile = parent::$dataBase->getBasePrepare(self::SQL_GET_PROFILE_BY_ID, ['id' => $id]);
+        } else {
+            $profile = parent::$dataBase->getBasePrepare(self::SQL_GET_PROFILE_BY_ACCOUNT_ID, ['account' => $id]);
+        }
         return ['id' => $profile[0]['id'], 'account' => $profile['0']['id_account'], 'name' => $profile['0']['name'], 'surname' => $profile['0']['surname'], 'birth' => $profile['0']['dt_birth'], 'sex' => $profile['0']['sex'], 'phone' => $profile['0']['phone'], 'email' => $profile['0']['email'], 'avatar' => $profile['0']['href_avatar']];
     }
 

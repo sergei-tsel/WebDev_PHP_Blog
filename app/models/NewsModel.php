@@ -47,7 +47,7 @@ class NewsModel extends Model
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_ONE_NEWS_BY_HREF, ['href_news' => $href]);
         $author = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS_AUTHOR, ['id' => $news[0]['id_profile']]);
         $news[0]['tag'] = explode(';', $news[0]['tag']);
-        if ($profile !== null) {
+        if ($profileId !== null) {
             $like = parent::$dataBase->getBasePrepare(self::SQL_GET_LIKE, [$news[0]['id'], $profileId]);
             if (!empty($like['news_id'])) {
                 return array('news' => $news[0], 'author' => $author[0], 'like' => 'like');

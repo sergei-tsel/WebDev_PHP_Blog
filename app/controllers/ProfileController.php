@@ -4,6 +4,7 @@ namespace Tsel\Blog\controllers;
 use Tsel\Blog\core\Controller;
 use Tsel\Blog\core\View;
 use Tsel\Blog\models\ProfileModel;
+use Tsel\Blog\services\Admin;
 use Tsel\Blog\services\Profile;
 
 class ProfileController extends Controller
@@ -45,5 +46,20 @@ class ProfileController extends Controller
     public function use() {
         $data = Profile::Removed->choose($this->model);
         echo $this->view->render('main', $data);
+    }
+
+    public function look($id) {
+        $data = Admin::Verify->choose($this->model, $id);
+        echo $this->view->render('profile', $data);
+    }
+
+    public function deactivate($accountId) {
+        $data = Admin::Qualify->choose($this->model, accountId: $accountId);
+        echo $this->view->render('profile', $data);
+    }
+
+    public function activate($accountId) {
+        $data = Admin::Certify->choose($this->model, accountId: $accountId);
+        echo $this->view->render('profile', $data);
     }
 }
