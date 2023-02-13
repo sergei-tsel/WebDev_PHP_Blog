@@ -29,4 +29,16 @@ class NewsController extends Controller
         $data = News::Reading->choose($this->model, $href);
         echo $this->view->render('news', $data);
     }
+
+    public function search()
+    {
+        $data = News::Searching->choose($this->model);
+        echo $this->view->render('admin', $data);
+    }
+
+    public function list()
+    {
+        $data = News::Listing->choose($this->model);
+        echo $this->view->render('admin', $data);
+    }
 }

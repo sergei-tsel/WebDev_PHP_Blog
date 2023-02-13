@@ -8,11 +8,16 @@ enum News
 {
     case Writing;
     case Reading;
+    case Searching;
+    case Listing;
 
-    public function choose($model, $href = null) {
-        return match($this) {
-            case News::Writing => $this->process($model),
-            case News::Reading => $model->getNewsByHref($href)
+    public function choose($model, $href = null)
+    {
+        return match ($this) {
+            News::Writing => $this->process($model),
+            News::Reading => $model->getNewsByHref($href),
+            News::Searching => $model->searchForNewsAndAuthors(),
+            News::Listing => $model->getLatestNewsList()
         };
     }
 
