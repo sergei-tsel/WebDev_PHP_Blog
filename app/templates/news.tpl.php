@@ -17,5 +17,17 @@
                 <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"><?php echo $tag ?></span>
             <?php endforeach; ?>
         </div>
+        <div class="row">
+            <a <?php if(!empty($like)) {
+                echo "hidden";
+            }?> href="/news/mark" class="btn btn-primary" tabindex="-1" role="button">Отметить</a>
+
+            <p class="text-muted">
+                <?php echo $news['amount_view'] . " просмотров" ?>
+            </p>
+            <p class="text-muted">
+                <?php echo $news['amount_like'] . " отметивших" ?>
+            </p>
+        </div>
     </footer>
 </article>

@@ -13,6 +13,9 @@ class NewsModel extends Model
     const SQL_GET_LATEST_NEWS_LIST = "SELECT news.title, news.prev_desc, news.href_news, news.tag, profile.id, profile.name, profile.surname, profile.href_avatar FROM news JOIN profile ON news.id_profile = profile.id WHERE news.dt_publish > (now() - DAY) () ORDER BY news.amount_like, news.amount_view DESC";
     const SQL_GET_NEWS_AUTHOR = "SELECT name, surname FROM profile where id = :id";
     const  SQL_SET_NEWS_VIEW = "UPDATE news SET amount_view = amount_view + 1 WHERE href_news = :href";
+    const SQL_SET_NEWS_LIKE = "UPDATE news SET amount_like = amount_like + 1 WHERE href_news = :href";
+    const SQL_SET_LIKE = "INSERT INTO like (id_news, id_profile) VALUES (:news, :profile)";
+    const SQL_GET_LIKE = "SELECT * FROM like where id_news = :news AND id_profile = :profile";
 
     public function setNews($author)
     {
@@ -24,6 +27,13 @@ class NewsModel extends Model
         parent::$dataBase->setBasePrepare(self::SQL_SET_NEWS, [$author, $title, $prevDesc, $fullDesc, $href, $tag]);
     }
 
+    public function setLike($href, $profileId)
+    {
+        $news = parent::$dataBase->getBasePrepare(self::SQL_GET_ONE_NEWS_BY_HREF, ['href_news' => $href]);
+        parent::$dataBase->setBasePrepare(self::SQL_SET_NEWS_LIKE, [$href]);
+        parent::$dataBase->setBasePrepare(self::SQL_SET_LIKE, [$news[0]['id'], $profileId]);
+    }
+
     public function getData()
     {
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS, []);
@@ -31,12 +41,18 @@ class NewsModel extends Model
         return array('news' => $news, 'total' => $total);
     }
 
-    public function getNewsByHref($href)
+    public function getNewsByHref($href, $profileId = null)
     {
         parent::$dataBase->setBasePrepare(self::SQL_SET_NEWS_VIEW, [$href]);
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_ONE_NEWS_BY_HREF, ['href_news' => $href]);
         $author = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS_AUTHOR, ['id' => $news[0]['id_profile']]);
         $news[0]['tag'] = explode(';', $news[0]['tag']);
+        if ($profile !== null) {
+            $like = parent::$dataBase->getBasePrepare(self::SQL_GET_LIKE, [$news[0]['id'], $profileId]);
+            if (!empty($like['news_id'])) {
+                return array('news' => $news[0], 'author' => $author[0], 'like' => 'like');
+            }
+        }
         return array('news' => $news[0], 'author' => $author[0]);
     }
 

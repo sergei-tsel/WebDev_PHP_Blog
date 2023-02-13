@@ -41,4 +41,10 @@ class NewsController extends Controller
         $data = News::Listing->choose($this->model);
         echo $this->view->render('admin', $data);
     }
+
+    public function mark($href)
+    {
+        $data = News::Marking->choose($this->model, $href);
+        echo $this->view->render('news', $data);
+    }
 }
