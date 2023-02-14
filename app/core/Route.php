@@ -37,6 +37,8 @@ class Route
         if (!empty($_COOKIE['PHPSESSID'])) {
             $controller = match($controllerName)
             {
+                'MainController' => MainController::class,
+                'AuthController' => AuthController::class,
                 'NewsController' => NewsController::class,
                 'ProfileController' => ProfileController::class,
                 default => 'not found'
