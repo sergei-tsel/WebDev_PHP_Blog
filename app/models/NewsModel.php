@@ -38,7 +38,7 @@ class NewsModel extends Model
     {
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS, []);
         for($i = 0; $i < count($news); $i++ ) {
-            $news[$i]['tag'] = explode(';', $news[0]['tag']);
+            $news[$i]['tag'] = explode(';', $news[$i]['tag']);
         }
         $total = parent::$dataBase->rowCount(self::SQL_GET_NEWS, []);
         return array('news' => $news, 'total' => $total);
@@ -65,7 +65,7 @@ class NewsModel extends Model
         $search = $search;
         $news = parent::$dataBase->getBasePrepare(self::SQL_GET_NEWS_AS_SEARCH_RESULT, ['title' => $search, 'tag' => $search, 'firstname' => $search, 'surname' => $search]);
         for($i = 0; $i < count($news); $i++ ) {
-            $news[$i]['tag'] = explode(';', $news[0]['tag']);
+            $news[$i]['tag'] = explode(';', $news[$i]['tag']);
         }
         $total = parent::$dataBase->rowCount(self::SQL_GET_NEWS_AS_SEARCH_RESULT, ['title' => $search, 'tag' => $search, 'firstname' => $search, 'surname' => $search]);
         return array('news' => $news, 'total' => $total);
