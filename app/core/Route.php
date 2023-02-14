@@ -3,6 +3,8 @@ namespace Tsel\Blog\core;
 
 use Tsel\Blog\controllers\MainController;
 use Tsel\Blog\controllers\AuthController;
+use Tsel\Blog\controllers\NewsController;
+use Tsel\Blog\controllers\ProfileController;
 
 class Route
 {
@@ -35,6 +37,8 @@ class Route
         if (!empty($_COOKIE['PHPSESSID'])) {
             $controller = match($controllerName)
             {
+                'NewsController' => NewsController::class,
+                'ProfileController' => ProfileController::class,
                 default => 'not found'
             };
         }

@@ -17,8 +17,8 @@ enum Profile
        $accountId = $model->getAccountIdByCookie();
 
        return match ($this) {
-            Profile::Specified => $model->getProfile($accountId),
-            Profile::Modified => $this->represent($model, $accountId,),
+            Profile::Specified => $model->getProfile(accountId: $accountId),
+            Profile::Modified => $this->represent($model, $accountId),
             Profile::Disconnected => $this->disconnect(),
             Profile::Removed => $this->deleteAccountAndProfile($model)
        };

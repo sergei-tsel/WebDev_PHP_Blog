@@ -16,17 +16,14 @@ enum Account
             Account::New => $model->create()
         };
 
-        if(!empty($accountId)) {
-            setcookie('login', $_POST['login'], 0, '/');
-            setcookie('password', $_POST['password'], 0, '/');
-            header('Location: /index.php');
-            session_start();
+        setcookie('login', $_POST['login'], 0, '/');
+        setcookie('password', $_POST['password'], 0, '/');
+        session_start();
 
-            if ($this === Account::New) {
-                $profileModel = new ProfileModel();
-                $profileModel->setProfile($accountId);
-                return $profileModel->getForm();
-            }
+        if ($this === Account::New) {
+            $profileModel = new ProfileModel();
+            $profileModel->setProfile($accountId);
+            return $profileModel->getForm();
         }
     }
 }
