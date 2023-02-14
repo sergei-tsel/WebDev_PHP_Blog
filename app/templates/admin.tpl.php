@@ -1,52 +1,56 @@
 <div class="row">
     <div>
-        <a href="/profile/read" class="btn btn-primary" tabindex="-1" role="button">Открыть свой профиль</a>
+        <a href="/profile/read" class="btn btn-primary col-md-2 mb-3" tabindex="-1" role="button">Открыть свой профиль</a>
     </div>
     <div>
-        <a href="/profile/introduce" class="btn btn-primary" tabindex="-1" role="button">Изменить свой профиль</a>
+        <a href="/profile/introduce" class="btn btn-primary col-md-2 mb-3" tabindex="-1" role="button">Изменить свой профиль</a>
     </div>
     <div>
-        <a href="/profile/exit" class="btn btn-primary" tabindex="-1" role="button">Выйти из своего профиля</a>
+        <a href="/profile/exit" class="btn btn-primary col-md-2 mb-3" tabindex="-1" role="button">Выйти из профиля</a>
     </div>
     <div>
-        <a href="/profile/use" class="btn btn-primary" tabindex="-1" role="button">Удалить свой профиль</a>
+        <a href="/profile/use" class="btn btn-primary col-md-2 mb-3" tabindex="-1" role="button">Удалить свой профиль</a>
     </div>
     <div>
-        <a href="/news/make" class="btn btn-primary" tabindex="-1" role="button">Добавить новость</a>
+        <a href="/news/make" class="btn btn-primary col-md-2 mb-3" tabindex="-1" role="button">Добавить новость</a>
     </div>
     <div>
-        <a href="/news/list" class="btn btn-primary" tabindex="-1" role="button">Вывести свежие новости в порядке убывания отметок и просмотров</a>
+        <a href="/news/list" class="btn btn-primary col-md-6 mb-3" tabindex="-1" role="button">Вывести свежие новости в порядке убывания отметок и просмотров</a>
     </div>
 </div>
 <div>
-    <div class="form-outline mb-4">
-        <form action="/news/search" method="post">
-            <input type="search" class="form-control" name="search" id="datatable-search-input">
-            <label class="form-label" for="datatable-search-input">Поиск</label>
-        </form>
+    <div class="input-group row mb-4">
+        <div class="border form-outline">
+            <form action="/news/search" method="post">
+                <input type="search" class="form-control" name="search" id="datatable-search-input">
+                <label class="form-label" for="datatable-search-input">Поиск по заголовкам и тэгам новостей, именам и фамилиям авторов</label>
+            </form>
+        </div>
     </div>
     <div id="datatable">
         <?php foreach ($news as $value) : ?>
-            <div class="card mb-3 row g-0">
-                <div class="col-md-4">
-                    <img src="<?php echo $value['href_avatar'] ?>" style="max-width: 70px; height: 50px" class="card-img-top img-fluid col-md-6" alt="Фотография"/>
-                    <p class="card-text"><?php echo $value['name'] . ' ' . $value['surname'] ?></p>
-                    <a href="/profile/look/<?php echo $value['id'] ?>" class="btn btn-primary" tabindex="-1" role="button">Об авторе</a>
-                </div>
-                <div class="col-md-8 card-body">
-                    <section class="border-bottom pb-4 mb-5>
+            <div class="card mb-3">
+                <div class="card-body row g-0">
+                    <div class="col-md-2">
+                        <img src="<?php echo $value['href_avatar'] ?>" style="max-width: 120px; height: 100px" class="card-img-top img-fluid col-md-6" alt="Фотография"/>
+                        <p class="card-text"><?php echo $value['name'] . ' ' . $value['surname'] ?></p>
+                        <a href="/profile/look/<?php echo $value['id'] ?>" class="btn btn-primary" tabindex="-1" role="button">Об авторе</a>
+                    </div>
+                    <div class="col-md-10">
+                        <section class="border-bottom pb-4 mb-5>
                         <div class="col-md-6 mb-4">
-                            <div class="row">
-                                <?php foreach ($value['tag'] as $tag): ?>
-                                    <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"><?php echo $tag ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                            <h4><strong><?php echo $value['title'] ?></strong></h4>
-                            <p class="text-muted">
-                                <?php echo $value['prev_desc'] ?>
-                            </p>
-                            <a href="/news/read/<?php echo $value['href_news'] ?>" class="btn btn-primary" tabindex="-1" role="button">Далее</a>
+                        <div class="row">
+                            <?php foreach ($value['tag'] as $tag): ?>
+                                <span class="badge bg-danger px-2 py-1 shadow-1-strong col-md-3 mb-3"><?php echo $tag ?></span>
+                            <?php endforeach; ?>
                         </div>
+                        <h4><strong><?php echo $value['title'] ?></strong></h4>
+                        <p class="text-muted">
+                            <?php echo $value['prev_desc'] ?>
+                        </p>
+                        <a href="/news/read/<?php echo $value['href_news'] ?>" class="btn btn-primary" tabindex="-1" role="button">Далее</a>
+                    </div>
+                </div>
                     </section>
                 </div>
             </div>
@@ -78,7 +82,9 @@ $nextLink = ($page < $pages) ? '<a href="/' . ($page + 1) .
     '" title="Next page">&rsaquo;</a> <a href="/' . $pages . '" title="Last page">&raquo;</a>' :
     '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
-echo
-'<div id="paging"><p>', $prevLink, ' Страница ', $page, ' из ', $pages, ' страниц, отображается ',
-$start, '-', $end, ' из ', $total, ' результатов ', $nextLink, ' </p></div>';
+if($total) {
+    echo
+    '<div id="paging"><p>', $prevLink, ' Страница ', $page, ' из ', $pages, ' страниц, отображается ',
+    $start, '-', $end, ' из ', $total, ' результатов ', $nextLink, ' </p></div>';
+}
 ?>

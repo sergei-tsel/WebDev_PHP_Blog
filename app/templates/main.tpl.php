@@ -4,8 +4,8 @@
         <section class="border-bottom pb-4 mb-5>
             <div class="col-md-6 mb-4">
                 <div class="row">
-                    <?php foreach ($value['tag'] as $tag): ?>
-                        <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"><?php echo $tag ?></span>
+                    <?php foreach ($value['tag'] as $tag) : ?>
+                        <span class="badge bg-danger px-2 py-1 shadow-1-strong col-md-2 mb-3"><?php echo $tag ?></span>
                     <?php endforeach; ?>
                 </div>
                 <h4><strong><?php echo $value['title'] ?></strong></h4>

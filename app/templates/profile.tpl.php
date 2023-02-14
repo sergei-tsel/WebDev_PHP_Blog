@@ -1,6 +1,6 @@
 <div>
     <div>
-        <a href="/profile/administer" class="btn btn-primary" tabindex="-1" role="button">Вернуться в админку</a>
+        <a href="/profile/administer" class="btn btn-primary" tabindex="-1" role="button">Продолжить</a>
     </div>
     <div class="card mb-3 row">
         <div class="row g-0">
